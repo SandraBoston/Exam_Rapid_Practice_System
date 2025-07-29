@@ -1,8 +1,8 @@
-# AI-Powered Data Science & Analytics Project Definition: Rapid Exam Prep Practice System
+# Project Definition: AI-Powered Rapid Certification Exam Practice System
 
 - Updated: 2025.06.12
 
-## Project Name: Rapid Certification Exam Accelerator
+## Project Name: AI-Powered Rapid Certification Exam Practice System
 
 ## Project and Work Product Description:
 This project addresses the gap between traditional study methods and efficient exam preparation for the certification exams. The Rapid Certification Exam Accelerator is an offline practice exam tool that helps users cycle through practice exams very quickly, focusing on areas of weakness and maximizing study effectiveness. It solves the problem of inefficient studying by allowing users to burn down difficult questions and return to them later, providing immediate feedback, and tracking progress over time.
