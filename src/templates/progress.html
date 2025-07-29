@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Progress Report - PCEP Accelerator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-graph-up"></i>
+                    Your Learning Progress
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="progressChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Progress Summary</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Total Study Sessions</span>
+                                <strong>{{ progress.total_sessions or 5 }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Questions Attempted</span>
+                                <strong>{{ progress.questions_attempted or 23 }}</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Average Score</span>
+                                <strong>{{ progress.average_score or 78 }}%</strong>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>Study Streak</span>
+                                <strong>{{ progress.study_streak or 3 }} days</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Topic Performance -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-book"></i>
+                    Performance by Topic
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="topic-progress mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Python Fundamentals</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-success" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="topic-progress mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Control Flow</span>
+                        <span>72%</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-info" style="width: 72%"></div>
+                    </div>
+                </div>
+                
+                <div class="topic-progress mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Data Collections</span>
+                        <span>68%</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-warning" style="width: 68%"></div>
+                    </div>
+                </div>
+                
+                <div class="topic-progress mb-3">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span>Functions & Exceptions</span>
+                        <span>91%</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-success" style="width: 91%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Recent Activity -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-clock-history"></i>
+                    Recent Activity
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item mb-3">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h6 class="mb-1">Practice Quiz Completed</h6>
+                            <p class="mb-1 text-muted">Score: 85% (9/10 correct)</p>
+                            <small class="text-muted">2 hours ago</small>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item mb-3">
+                        <div class="timeline-marker bg-info"></div>
+                        <div class="timeline-content">
+                            <h6 class="mb-1">Study Session</h6>
+                            <p class="mb-1 text-muted">Functions & Exceptions module</p>
+                            <small class="text-muted">Yesterday</small>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item mb-3">
+                        <div class="timeline-marker bg-warning"></div>
+                        <div class="timeline-content">
+                            <h6 class="mb-1">Practice Quiz</h6>
+                            <p class="mb-1 text-muted">Score: 70% (7/10 correct)</p>
+                            <small class="text-muted">2 days ago</small>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h6 class="mb-1">Account Created</h6>
+                            <p class="mb-1 text-muted">Welcome to PCEP Accelerator!</p>
+                            <small class="text-muted">1 week ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recommendations -->
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightbulb"></i>
+                    Personalized Recommendations
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="alert alert-info h-100">
+                            <h6 class="alert-heading">
+                                <i class="bi bi-target"></i>
+                                Focus Area
+                            </h6>
+                            <p class="mb-0">Practice more Data Collections questions to improve your weakest area.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="alert alert-success h-100">
+                            <h6 class="alert-heading">
+                                <i class="bi bi-calendar-check"></i>
+                                Study Plan
+                            </h6>
+                            <p class="mb-0">You're on track! Continue with 30 minutes daily practice.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="alert alert-warning h-100">
+                            <h6 class="alert-heading">
+                                <i class="bi bi-trophy"></i>
+                                Exam Ready
+                            </h6>
+                            <p class="mb-0">Achieve 80% average across all topics to be exam-ready.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Progress Chart
+const ctx = document.getElementById('progressChart').getContext('2d');
+const progressChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Current'],
+        datasets: [{
+            label: 'Average Score (%)',
+            data: [45, 58, 65, 72, 78],
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                text: 'Progress Over Time'
+            }
+        }
+    }
+});
+</script>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -25px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.timeline-content {
+    margin-left: 10px;
+}
+</style>
+{% endblock %}

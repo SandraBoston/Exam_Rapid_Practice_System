@@ -1,0 +1,34 @@
+{
+			"id": 65580,
+			"question": "<p>What value will be assigned to the <code >x<\/code> variable?<\/p>\n\n<code class=\"codep\">z = 10\ny = 0\nx = y &lt; z and z &gt; y or y &gt; z and z &lt; y\n\n<\/code>\n<br>",
+			"type": "Single Choice",
+			"htmlType": "radio",
+			"optionsText": null,
+			"options": [
+				{
+					"id": 247252,
+					"option": "<p><code >True<\/code><\/p>"
+				},
+				{
+					"id": 247253,
+					"option": "<p><code >False<\/code><\/p>"
+				},
+				{
+					"id": 247254,
+					"option": "<p><code >1<\/code><\/p>"
+				},
+				{
+					"id": 247255,
+					"option": "<p><code >0<\/code><\/p>"
+				}
+			],
+			"shuffleOptions": true,
+			"timeLimitInMinutes": 0,
+			"timeLimitInSeconds": 0,
+			"timeWarningInMinutes": 0,
+			"timeWarningInSeconds": 0,
+			"audioSrc": null,
+			"audioPlayLimit": 0,
+			"maxResponses": null,
+			"sectionId": 3092
+		},

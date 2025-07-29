@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - PCEP Accelerator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Welcome Card -->
+    <div class="col-12 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h1 class="card-title">
+                    <i class="bi bi-mortarboard"></i>
+                    Welcome to PCEP Certification Accelerator
+                </h1>
+                <p class="card-text lead">
+                    Master Python programming fundamentals and ace your PCEP certification exam!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Quick Stats -->
+    <div class="col-md-3 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <i class="bi bi-question-circle-fill text-primary" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-2">Practice Questions</h5>
+                <h3 class="text-primary">{{ stats.total_questions or 0 }}</h3>
+                <p class="text-muted">Available</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-2">Completed</h5>
+                <h3 class="text-success">{{ stats.completed_questions or 0 }}</h3>
+                <p class="text-muted">Questions</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <i class="bi bi-trophy-fill text-warning" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-2">Success Rate</h5>
+                <h3 class="text-warning">{{ stats.success_rate or 0 }}%</h3>
+                <p class="text-muted">Accuracy</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <i class="bi bi-clock-fill text-info" style="font-size: 2rem;"></i>
+                <h5 class="card-title mt-2">Study Time</h5>
+                <h3 class="text-info">{{ stats.study_hours or 0 }}h</h3>
+                <p class="text-muted">This Week</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Quick Actions -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-lightning-fill"></i>
+                    Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('practice_quiz') }}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-play-fill"></i>
+                        Start Practice Quiz
+                    </a>
+                    <a href="{{ url_for('progress') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-graph-up"></i>
+                        View Progress Report
+                    </a>
+                    <button class="btn btn-outline-info" onclick="showSystemInfo()">
+                        <i class="bi bi-info-circle"></i>
+                        System Information
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PCEP Topics Overview -->
+    <div class="col-md-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-book"></i>
+                    PCEP Exam Topics
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Computer Programming and Python Fundamentals
+                        <span class="badge bg-primary rounded-pill">25%</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Control Flow & Conditional Blocks
+                        <span class="badge bg-primary rounded-pill">29%</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Data Collections
+                        <span class="badge bg-primary rounded-pill">25%</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center">
+                        Functions and Exceptions
+                        <span class="badge bg-primary rounded-pill">21%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System Info Modal -->
+<div class="modal fade" id="systemInfoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-gear"></i>
+                    System Information
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-sm">
+                    <tr>
+                        <td><strong>Database Status:</strong></td>
+                        <td><span class="badge bg-success">Connected</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Environment:</strong></td>
+                        <td>{{ config.environment or 'Development' }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Database URL:</strong></td>
+                        <td><code>{{ config.database_url or 'Not configured' }}</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Version:</strong></td>
+                        <td>1.0.0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+function showSystemInfo() {
+    const modal = new bootstrap.Modal(document.getElementById('systemInfoModal'));
+    modal.show();
+}
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+# PCEP Certification Exam Accelerator - Conda Environment File
+# Generated: 2025-06-23
+# Python 3.9+ required
+# Use conda-forge channel for maximum package availability
+
+name: pcep_env
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python>=3.9
+  - conda
+  
+  # Core Web Framework (available on conda-forge)
+  - flask>=2.0.0
+  - jinja2>=3.0.0
+  - werkzeug>=2.0.0
+
+  # Database ORM and Migrations (all available on conda-forge)
+  - sqlalchemy>=1.4.0
+  - alembic>=1.7.0
+  - flask-sqlalchemy>=2.5.0
+  - flask-migrate>=3.1.0
+
+  # Web Forms and Security (all available on conda-forge)
+  - flask-wtf>=1.0.0
+  - wtforms>=3.0.0
+  - flask-login>=0.6.0
+  - itsdangerous>=2.0.0
+
+  # Data Processing (all available on conda-forge)
+  - beautifulsoup4>=4.10.0
+  - lxml>=4.6.0
+  - requests>=2.26.0
+
+  # Development Dependencies (all available on conda-forge)
+  - pytest>=6.2.0
+  - pytest-cov>=3.0.0
+  - pytest-mock>=3.6.0
+  - black>=21.9.0
+  - flake8>=4.0.0
+  - isort>=5.9.0
+  
+  # Optional: Production Server (available on conda-forge)
+  - gunicorn>=20.1.0
+
+  # Packages only available via pip
+  - pip
+  - pip:
+      # Python Code Execution Security (not available on conda-forge)
+      - RestrictedPython>=5.2.0
+
+# Environment variables (optional)
+variables:
+  FLASK_APP: src.app:create_app
+  FLASK_ENV: development
+  FLASK_DEBUG: 1
+

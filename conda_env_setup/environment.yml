@@ -1,0 +1,37 @@
+# PCEP Certification Exam Accelerator - Conda Environment
+# Generated: 2025-06-20
+# Usage: conda env create -f environment.yml
+
+name: pcep_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  
+  # Core packages available on conda-forge
+  - flask
+  - jinja2
+  - werkzeug
+  - sqlalchemy
+  - alembic
+  - beautifulsoup4
+  - lxml
+  - requests
+  - pytest
+  - pytest-cov
+  - black
+  - flake8
+  - isort
+  - gunicorn
+  - wtforms
+  - itsdangerous
+    # Flask extensions and specialized packages (pip only)
+  - pip:
+    - Flask-SQLAlchemy>=2.5.0
+    - Flask-Migrate>=3.1.0
+    - Flask-WTF>=1.0.0
+    - Flask-Login>=0.6.0
+    - pytest-mock>=3.6.0
+    - RestrictedPython>=5.2.0

@@ -1,0 +1,519 @@
+{% extends "base.html" %}
+
+{% block title %}Practice Quiz - PCEP Accelerator{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-question-circle"></i>
+                    PCEP Practice Quiz
+                </h4>
+            </div>
+            
+            <div class="card-body" id="quiz-container">
+                <!-- Quiz will be loaded here -->
+                <div class="text-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-3">Preparing your practice questions...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quiz Controls -->
+        <div class="card mt-3" id="quiz-controls" style="display: none;">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" id="quiz-progress" style="width: 0%"></div>
+                        </div>
+                        <small class="text-muted">Question <span id="current-question">1</span> of <span id="total-questions">10</span></small>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div id="timer" class="fs-5 text-primary">
+                            <i class="bi bi-clock"></i>
+                            <span id="time-remaining">05:00</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <button class="btn btn-outline-secondary me-2" id="prev-btn" disabled>
+                            <i class="bi bi-arrow-left"></i> Previous
+                        </button>
+                        <button class="btn btn-primary" id="next-btn">
+                            Next <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Start Modal -->
+<div class="modal fade" id="quizStartModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-play-circle"></i>
+                    Start Practice Quiz
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Ready to test your Python knowledge?</p>
+                <div class="mb-3">
+                    <label for="quiz-duration" class="form-label">Quiz Duration:</label>
+                    <select class="form-select" id="quiz-duration">
+                        <option value="5">5 minutes (Quick)</option>
+                        <option value="10" selected>10 minutes (Standard)</option>
+                        <option value="15">15 minutes (Extended)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="question-count" class="form-label">Number of Questions:</label>
+                    <select class="form-select" id="question-count">
+                        <option value="5">5 questions</option>
+                        <option value="10" selected>10 questions</option>
+                        <option value="15">15 questions</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="startQuiz()">
+                    <i class="bi bi-play-fill"></i>
+                    Start Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Results Modal -->
+<div class="modal fade" id="quizResultsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-trophy"></i>
+                    Quiz Results
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="quiz-results-content">
+                <!-- Results will be populated here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="restartQuiz()">
+                    <i class="bi bi-arrow-repeat"></i>
+                    Take Another Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Quiz data and state
+let currentQuiz = null;
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let quizTimer = null;
+let timeRemaining = 600; // 10 minutes default
+
+// Questions will be loaded from the API
+let sampleQuestions = [];
+
+// Load questions from API
+async function loadQuestionsFromAPI() {
+    try {
+        const response = await fetch('/api/questions');
+        if (!response.ok) {
+            throw new Error('Failed to fetch questions');
+        }
+        sampleQuestions = await response.json();
+        console.log('Loaded questions from API:', sampleQuestions);
+    } catch (error) {
+        console.error('Error loading questions:', error);
+        // Fallback to hardcoded questions if API fails
+        sampleQuestions = [
+            {
+                "id": 1,
+                "question": "Which of the following is the correct way to create a comment in Python?",
+                "options": [
+                    "// This is a comment",
+                    "/* This is a comment */",
+                    "# This is a comment", 
+                    "<!-- This is a comment -->"
+                ],
+                "correct": 2,
+                "explanation": "In Python, single-line comments start with the # symbol.",
+                "topic": "Python Fundamentals"
+            },
+            {
+                "id": 2,
+                "question": "What is the output of: print(type(5.0))?",
+                "options": [
+                    "<class 'int'>",
+                    "<class 'float'>",
+                    "<class 'str'>",
+                    "<class 'decimal'>"
+                ],
+                "correct": 1,
+                "explanation": "5.0 is a floating-point number, so its type is 'float'.",
+                "topic": "Data Types"
+            },
+            {
+                "id": 3,
+                "question": "Which operator is used for integer division in Python?",
+                "options": [
+                    "/",
+                    "//",
+                    "%",
+                    "**"
+                ],
+                "correct": 1,
+                "explanation": "The // operator performs floor division (integer division).",
+                "topic": "Operators"
+            }
+        ];
+    }
+}
+
+// Initialize quiz on page load
+document.addEventListener('DOMContentLoaded', async function() {
+    // Load questions from API first
+    await loadQuestionsFromAPI();
+    
+    // Then show the quiz start modal
+    showQuizStartModal();
+});
+
+function showQuizStartModal() {
+    const modal = new bootstrap.Modal(document.getElementById('quizStartModal'));
+    modal.show();
+}
+
+function startQuiz() {
+    const duration = parseInt(document.getElementById('quiz-duration').value);
+    const questionCount = parseInt(document.getElementById('question-count').value);
+    
+    // Initialize quiz state
+    currentQuiz = sampleQuestions.slice(0, Math.min(questionCount, sampleQuestions.length));
+    currentQuestionIndex = 0;
+    userAnswers = new Array(currentQuiz.length).fill(null);
+    timeRemaining = duration * 60;
+    
+    // Hide modal and show quiz
+    bootstrap.Modal.getInstance(document.getElementById('quizStartModal')).hide();
+    
+    // Show quiz interface
+    document.getElementById('quiz-controls').style.display = 'block';
+    document.getElementById('total-questions').textContent = currentQuiz.length;
+    
+    // Load first question
+    loadQuestion();
+    
+    // Start timer
+    startTimer();
+}
+
+function loadQuestion() {
+    const question = currentQuiz[currentQuestionIndex];
+    const container = document.getElementById('quiz-container');
+    
+    // Debug logging
+    console.log('Loading question:', currentQuestionIndex + 1, question);
+    console.log('Question options:', question.options);
+    
+    // Validate question data
+    if (!question || !question.options || !Array.isArray(question.options)) {
+        console.error('Invalid question data:', question);
+        container.innerHTML = `
+            <div class="alert alert-danger">
+                <h5>Error Loading Question</h5>
+                <p>Question ${currentQuestionIndex + 1} has invalid data.</p>
+                <pre>${JSON.stringify(question, null, 2)}</pre>
+            </div>
+        `;
+        return;
+    }
+    
+    container.innerHTML = `
+        <div class="question-content">
+            <h5 class="mb-4">Question ${currentQuestionIndex + 1}:</h5>
+            
+            ${question.type === 'multi-select' ? `
+                <div class="multi-select-hint">
+                    <i class="bi bi-info-circle"></i>
+                    Select <strong>${question.required_answers}</strong> answer${question.required_answers > 1 ? 's' : ''}
+                    <span class="badge bg-primary">${question.required_answers} required</span>
+                </div>
+            ` : ''}
+            
+            <p class="lead mb-4">${question.question}</p>
+            
+            <div class="options">
+                ${question.options.map((option, index) => {
+                    console.log(`Option ${index}:`, option);
+                    const inputType = question.type === 'multi-select' ? 'checkbox' : 'radio';
+                    const isChecked = question.type === 'multi-select' 
+                        ? (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].includes(index))
+                        : (userAnswers[currentQuestionIndex] === index);
+                    
+                    return `
+                        <div class="form-check mb-3 ${question.type === 'multi-select' ? 'form-check-multi' : ''}">
+                            <input class="form-check-input" type="${inputType}" name="answer" id="option${index}" value="${index}"
+                                   ${isChecked ? 'checked' : ''}>
+                            <label class="form-check-label" for="option${index}">
+                                ${option}
+                            </label>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+            
+            <!-- Debug info (remove in production) -->
+            <div class="mt-3 text-muted small">
+                <strong>Debug:</strong> Question ID: ${question.id}, Type: ${question.type || 'single-select'}, 
+                Correct Index: ${question.correct}<br>
+                <strong>Options Array:</strong> ${JSON.stringify(question.options)}
+            </div>
+        </div>
+    `;
+    
+    // Update progress
+    updateProgress();
+    
+    // Update navigation buttons
+    updateNavigation();
+    
+    // Apply syntax highlighting to code blocks
+    applySyntaxHighlighting();
+    
+    // Add event listeners for answer selection
+    document.querySelectorAll('input[name="answer"]').forEach(input => {
+        input.addEventListener('change', function() {
+            const question = currentQuiz[currentQuestionIndex];
+            
+            if (question.type === 'multi-select') {
+                // Handle checkbox (multi-select) logic
+                if (!userAnswers[currentQuestionIndex]) {
+                    userAnswers[currentQuestionIndex] = [];
+                }
+                
+                const index = parseInt(this.value);
+                if (this.checked) {
+                    // Add answer if not already present
+                    if (!userAnswers[currentQuestionIndex].includes(index)) {
+                        userAnswers[currentQuestionIndex].push(index);
+                    }
+                } else {
+                    // Remove answer
+                    userAnswers[currentQuestionIndex] = userAnswers[currentQuestionIndex].filter(i => i !== index);
+                }
+                
+                // Update visual feedback
+                this.closest('.form-check-multi').classList.toggle('selected', this.checked);
+                
+            } else {
+                // Handle radio button (single-select) logic
+                userAnswers[currentQuestionIndex] = parseInt(this.value);
+            }
+        });
+    });
+}
+
+function updateProgress() {
+    const progress = ((currentQuestionIndex + 1) / currentQuiz.length) * 100;
+    document.getElementById('quiz-progress').style.width = progress + '%';
+    document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+}
+
+function updateNavigation() {
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    
+    prevBtn.disabled = currentQuestionIndex === 0;
+    
+    if (currentQuestionIndex === currentQuiz.length - 1) {
+        nextBtn.innerHTML = '<i class="bi bi-check-circle"></i> Finish Quiz';
+        nextBtn.onclick = finishQuiz;
+    } else {
+        nextBtn.innerHTML = 'Next <i class="bi bi-arrow-right"></i>';
+        nextBtn.onclick = nextQuestion;
+    }
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < currentQuiz.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion();
+    }
+}
+
+function startTimer() {
+    quizTimer = setInterval(() => {
+        timeRemaining--;
+        
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        
+        document.getElementById('time-remaining').textContent = 
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        if (timeRemaining <= 0) {
+            clearInterval(quizTimer);
+            finishQuiz();
+        }
+    }, 1000);
+}
+
+function finishQuiz() {
+    clearInterval(quizTimer);
+    
+    // Calculate results
+    let correct = 0;
+    const results = currentQuiz.map((question, index) => {
+        const userAnswer = userAnswers[index];
+        const correctAnswer = question.correct;
+        const isCorrect = userAnswer === correctAnswer;
+        
+        // Debug logging
+        console.log(`Question ${index + 1}:`, {
+            question: question.question,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer,
+            userAnswerText: userAnswer !== null ? question.options[userAnswer] : 'Not answered',
+            correctAnswerText: question.options[correctAnswer],
+            isCorrect: isCorrect
+        });
+        
+        if (isCorrect) correct++;
+        
+        return {
+            question: question.question,
+            userAnswer: userAnswer !== null ? question.options[userAnswer] : 'Not answered',
+            correctAnswer: question.options[correctAnswer],
+            isCorrect: isCorrect,
+            explanation: question.explanation
+        };
+    });
+    
+    const score = Math.round((correct / currentQuiz.length) * 100);
+    
+    console.log('Quiz Results:', { score, correct, total: currentQuiz.length, results });
+    
+    // Show results
+    showQuizResults(score, correct, results);
+}
+
+function showQuizResults(score, correct, results) {
+    const resultsContent = document.getElementById('quiz-results-content');
+    
+    resultsContent.innerHTML = `
+        <div class="text-center mb-4">
+            <h2 class="display-4 ${score >= 70 ? 'text-success' : 'text-warning'}">
+                ${score}%
+            </h2>
+            <p class="lead">You got ${correct} out of ${currentQuiz.length} questions correct!</p>
+            <div class="alert ${score >= 70 ? 'alert-success' : 'alert-warning'}">
+                ${score >= 70 ? 
+                    '<i class="bi bi-check-circle"></i> Great job! You\'re ready for the PCEP exam!' :
+                    '<i class="bi bi-exclamation-triangle"></i> Keep practicing to improve your score!'
+                }
+            </div>
+        </div>
+        
+        <div class="accordion" id="resultsAccordion">
+            ${results.map((result, index) => `
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="heading${index}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                data-bs-target="#collapse${index}">
+                            <span class="me-2 ${result.isCorrect ? 'text-success' : 'text-danger'}">
+                                <i class="bi bi-${result.isCorrect ? 'check-circle' : 'x-circle'}"></i>
+                            </span>
+                            Question ${index + 1}
+                        </button>
+                    </h2>
+                    <div id="collapse${index}" class="accordion-collapse collapse" 
+                         data-bs-parent="#resultsAccordion">
+                        <div class="accordion-body">
+                            <p><strong>Question:</strong> ${result.question}</p>
+                            <p><strong>Your Answer:</strong> 
+                                <span class="${result.isCorrect ? 'text-success' : 'text-danger'}">
+                                    ${result.userAnswer}
+                                </span>
+                            </p>
+                            <p><strong>Correct Answer:</strong> 
+                                <span class="text-success">${result.correctAnswer}</span>
+                            </p>
+                            <p><strong>Explanation:</strong> ${result.explanation}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+    
+    const modal = new bootstrap.Modal(document.getElementById('quizResultsModal'));
+    modal.show();
+}
+
+function restartQuiz() {
+    bootstrap.Modal.getInstance(document.getElementById('quizResultsModal')).hide();
+    document.getElementById('quiz-controls').style.display = 'none';
+    showQuizStartModal();
+}
+
+// Navigation event handlers
+document.getElementById('prev-btn').onclick = prevQuestion;
+
+function applySyntaxHighlighting() {
+    // Find all code blocks with class "codep"
+    document.querySelectorAll('.codep, code.codep').forEach(codeBlock => {
+        let code = codeBlock.textContent || codeBlock.innerText;
+        
+        // Simple Python syntax highlighting
+        code = code
+            // Keywords
+            .replace(/\b(print|input|if|else|elif|for|while|def|class|import|from|return|True|False|None|and|or|not|in)\b/g, '<span class="keyword">$1</span>')
+            // Strings
+            .replace(/(['"])(.*?)\1/g, '<span class="string">$1$2$1</span>')
+            // Numbers
+            .replace(/\b(\d+\.?\d*)\b/g, '<span class="number">$1</span>')
+            // Comments
+            .replace(/(#.*$)/gm, '<span class="comment">$1</span>')
+            // Functions
+            .replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g, '<span class="function">$1</span>(')
+            // Operators
+            .replace(/([+\-*/%=<>!&|])/g, '<span class="operator">$1</span>');
+        
+        codeBlock.innerHTML = code;
+    });
+}
+
+// Apply syntax highlighting when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    applySyntaxHighlighting();
+});
+
+</script>
+{% endblock %}
