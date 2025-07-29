@@ -1,11 +1,11 @@
-# AI-Powered Data Science & Analytics Project Definition: PCEP Fast Exam Prep
+# AI-Powered Data Science & Analytics Project Definition: Rapid Exam Prep Practice System
 
 - Updated: 2025.06.12
 
-## Project Name: PCEP Certification Exam Accelerator
+## Project Name: Rapid Certification Exam Accelerator
 
 ## Project and Work Product Description:
-This project addresses the gap between traditional study methods and efficient exam preparation for the Python Certified Entry-level Programmer (PCEP) certification. The PCEP Certification Exam Accelerator is an offline practice exam tool that helps users cycle through practice exams very quickly, focusing on areas of weakness and maximizing study effectiveness. It solves the problem of inefficient studying by allowing users to burn down difficult questions and return to them later, providing immediate feedback, and tracking progress over time.
+This project addresses the gap between traditional study methods and efficient exam preparation for the certification exams. The Rapid Certification Exam Accelerator is an offline practice exam tool that helps users cycle through practice exams very quickly, focusing on areas of weakness and maximizing study effectiveness. It solves the problem of inefficient studying by allowing users to burn down difficult questions and return to them later, providing immediate feedback, and tracking progress over time.
 
 ## Description of Solution:
 The solution implements a Flask-based web interface that displays exam questions and answers extracted from HTML files containing practice exams. The system stores exam data in a local SQLite database for fast access and offline use, with a comprehensive schema designed to maintain data integrity. Users can select exams, practice specific topics, track their progress with visualizations, and use an embedded Python interpreter to test code in real-time. The MVP 1.0 will deliver core functionality, with multi-user features planned for later versions.
