@@ -1,6 +1,6 @@
-# Project Definition: AI-Powered Rapid Certification Exam Practice System
+# AI-Powered Rapid Certification Exam Practice System
 
-- Updated: 2025.06.12
+- Updated: 2025.07.29
 
 ## Project Name: AI-Powered Rapid Certification Exam Practice System
 
