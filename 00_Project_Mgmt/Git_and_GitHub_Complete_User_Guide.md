@@ -1,9 +1,10 @@
 # Git and GitHub Complete User Guide: Safe and Secure Version Control
 
-**Document Version**: 1.0  
+**Document Version**: 1.1  
 **Date**: July 29, 2025  
 **Purpose**: Comprehensive guide for using Git and GitHub.com for version control  
-**Audience**: Developers at all levels seeking safe and secure version control practices
+**Audience**: Developers at all levels seeking safe and secure version control practices  
+**Updated**: Added section on renaming default branch from master to main
 
 ---
 
@@ -11,15 +12,16 @@
 
 1. [Overview and Benefits](#overview-and-benefits)
 2. [Initial Setup and Configuration](#initial-setup-and-configuration)
-3. [Top 10 Most Used Git Commands](#top-10-most-used-git-commands)
-4. [Creating Repositories](#creating-repositories)
-5. [Basic Workflow](#basic-workflow)
-6. [Branching and Merging](#branching-and-merging)
-7. [Remote Repository Management](#remote-repository-management)
-8. [Security Best Practices](#security-best-practices)
-9. [Common Scenarios and Solutions](#common-scenarios-and-solutions)
-10. [Troubleshooting Guide](#troubleshooting-guide)
-11. [Advanced Tips and Best Practices](#advanced-tips-and-best-practices)
+3. [Renaming Default Branch from Master to Main](#renaming-default-branch-from-master-to-main)
+4. [Top 10 Most Used Git Commands](#top-10-most-used-git-commands)
+5. [Creating Repositories](#creating-repositories)
+6. [Basic Workflow](#basic-workflow)
+7. [Branching and Merging](#branching-and-merging)
+8. [Remote Repository Management](#remote-repository-management)
+9. [Security Best Practices](#security-best-practices)
+10. [Common Scenarios and Solutions](#common-scenarios-and-solutions)
+11. [Troubleshooting Guide](#troubleshooting-guide)
+12. [Advanced Tips and Best Practices](#advanced-tips-and-best-practices)
 
 ---
 
@@ -77,7 +79,7 @@ sudo apt install git
 git config --global user.name "Your Full Name"
 git config --global user.email "your.email@example.com"
 
-# Set default branch name
+# Set default branch name (recommended for new repositories)
 git config --global init.defaultBranch main
 
 # Set default editor
@@ -124,6 +126,121 @@ cat ~/.ssh/id_ed25519.pub
 ```
 
 4. **Add SSH Key to GitHub**: Settings → SSH and GPG keys → New SSH key
+
+---
+
+## Renaming Default Branch from Master to Main
+
+### Why Change from Master to Main?
+Modern best practices recommend using `main` as the default branch name for inclusivity. GitHub now defaults to `main` for new repositories, and many organizations have adopted this standard.
+
+### Method 1: For Existing Local Repository
+
+```bash
+# 1. Switch to the master branch (if not already there)
+git checkout master
+
+# 2. Rename the branch locally
+git branch -m master main
+
+# 3. Push the new main branch to remote
+git push -u origin main
+
+# 4. Update the default branch on GitHub
+# Go to GitHub → Repository → Settings → Branches → Switch default branch to 'main'
+
+# 5. Delete the old master branch from remote (after updating GitHub default)
+git push origin --delete master
+```
+
+### Method 2: For New Repositories (Prevention)
+
+```bash
+# Set main as default for all new repositories globally
+git config --global init.defaultBranch main
+
+# Now when you create new repositories:
+git init
+# This will automatically create 'main' branch instead of 'master'
+```
+
+### Method 3: Complete Step-by-Step Process
+
+```bash
+# Step 1: Ensure you're on master branch
+git status
+git checkout master
+
+# Step 2: Rename branch locally
+git branch -m master main
+
+# Step 3: Push new branch and set upstream
+git push -u origin main
+
+# Step 4: Update GitHub default branch (via web interface)
+# - Go to your repository on GitHub
+# - Click Settings tab
+# - Click Branches in left sidebar
+# - Click pencil icon next to default branch
+# - Select 'main' from dropdown
+# - Click Update
+
+# Step 5: Update local tracking (if needed)
+git branch --set-upstream-to=origin/main main
+
+# Step 6: Delete old master branch from remote
+git push origin --delete master
+
+# Step 7: Clean up local references
+git remote prune origin
+```
+
+### Method 4: GitHub CLI (if you have it installed)
+
+```bash
+# Rename branch locally
+git branch -m master main
+git push -u origin main
+
+# Update default branch on GitHub using CLI
+gh repo edit --default-branch main
+
+# Delete old master branch
+git push origin --delete master
+```
+
+### Important Considerations
+
+1. **Team Coordination**: Notify team members before making this change
+2. **CI/CD Updates**: Update any build scripts or CI/CD configurations that reference `master`
+3. **Documentation**: Update README files and documentation that mention `master`
+4. **Clone URLs**: Existing clone commands will still work, but new clones will use `main`
+
+### For Team Members After the Change
+
+```bash
+# When team members pull the changes:
+git checkout master
+git pull origin main
+git branch -m master main
+git branch --set-upstream-to=origin/main main
+
+# Or simply:
+git fetch origin
+git checkout main
+git branch -d master  # delete local master branch
+```
+
+### Update Any Scripts or Aliases
+
+If you have any scripts or Git aliases that reference `master`, update them:
+
+```bash
+# Example: Update alias that was pointing to master
+git config --global alias.mainpull "pull origin master"
+# Change to:
+git config --global alias.mainpull "pull origin main"
+```
 
 ---
 
