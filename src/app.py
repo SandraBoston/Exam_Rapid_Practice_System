@@ -121,13 +121,44 @@ def register_routes(app, config_name):
     @app.route('/')
     def dashboard():
         """Main dashboard page"""
-        # Sample data - would normally come from database
-        stats = {
-            'total_questions': 150,
-            'completed_questions': 23,
-            'success_rate': 78,
-            'study_hours': 12
-        }
+        # Get real data from database
+        try:
+            if hasattr(app, 'db_manager'):
+                session = app.db_manager.get_session()
+                
+                # Get actual counts from database
+                total_questions = session.query(Question).count()
+                total_exams = session.query(Exam).count()
+                
+                # For now, keep sample data for other stats until we implement user tracking
+                stats = {
+                    'total_questions': total_questions,
+                    'total_exams': total_exams,
+                    'completed_questions': 23,  # Sample data
+                    'success_rate': 78,  # Sample data
+                    'study_hours': 12  # Sample data
+                }
+                
+                session.close()
+            else:
+                # Fallback to sample data if database not available
+                stats = {
+                    'total_questions': 150,
+                    'total_exams': 0,
+                    'completed_questions': 23,
+                    'success_rate': 78,
+                    'study_hours': 12
+                }
+        except Exception as e:
+            print(f"Error getting database stats: {e}")
+            # Fallback to sample data
+            stats = {
+                'total_questions': 150,
+                'total_exams': 0,
+                'completed_questions': 23,
+                'success_rate': 78,
+                'study_hours': 12
+            }
         
         config = {
             'environment': config_name,

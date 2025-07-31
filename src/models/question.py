@@ -26,6 +26,10 @@ class Question(BaseModel):
     question_order = Column(Integer, default=0, nullable=False, index=True)
     question_metadata = Column('metadata', Text, default='{}')  # JSON metadata for question types, multi-select, etc.
     
+    # Enhanced metadata fields for source tracking
+    source_exam_external_id = Column(Integer)  # Links to original exam's external ID
+    original_question_number = Column(Integer)  # Original question number in source
+    
     # Relationships
     topic = relationship("Topic", back_populates="questions")
     exam = relationship("Exam", back_populates="questions")

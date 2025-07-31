@@ -24,7 +24,14 @@ class Exam(BaseModel, JSONMixin):
     version = Column(String(20), default='1.0', nullable=False)
     is_active = Column(Boolean, default=True, nullable=False, index=True)
     exam_metadata = Column(Text)  # JSON storage for additional exam metadata (renamed to avoid SQLAlchemy conflict)
-      # Relationships
+    
+    # Enhanced metadata fields for file type recognition and source tracking
+    exam_external_id = Column(Integer, index=True)  # Original ID from source JSON
+    source_filename_new = Column(String(255))  # Original filename for audit trail
+    file_type = Column(String(20))  # Classification: quiz/test/exam/assessment
+    time_limit_minutes = Column(Integer)  # Time limit in minutes (more intuitive than seconds)
+    
+    # Relationships
     questions = relationship("Question", back_populates="exam", cascade="all, delete-orphan")
     exam_sessions = relationship("ExamSession", back_populates="exam")
     
