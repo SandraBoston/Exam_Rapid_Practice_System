@@ -1,0 +1,33 @@
+{
+  "timeLimitInMinutes": 45,
+  "questions": [
+    {
+      "id": 3,
+      "question": "What does the print() function do?",
+      "options": [
+        "Displays output",
+        "Calculates values",
+        "Stores data",
+        "Imports modules"
+      ],
+      "correct": 0,
+      "explanation": "The print() function displays output to the console."
+    },
+    {
+      "id": 4,
+      "question": "Mark all that apply: Which are valid Python operators?",
+      "options": [
+        "+",
+        "-",
+        "*",
+        "&"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "+, -, and * are arithmetic operators. & is a bitwise operator."
+    }
+  ]
+}

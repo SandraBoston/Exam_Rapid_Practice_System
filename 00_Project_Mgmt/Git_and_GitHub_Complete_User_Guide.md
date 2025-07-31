@@ -143,11 +143,11 @@ git checkout master
 # 2. Rename the branch locally
 git branch -m master main
 
-# 3. Push the new main branch to remote
-git push -u origin main
+# 3. Link the local and remote repository
+git remote add origin https://github.com/SandraBoston/Exam_Rapid_Practice_System.git
 
-# 4. Update the default branch on GitHub
-# Go to GitHub → Repository → Settings → Branches → Switch default branch to 'main'
+# 4. Push the new main branch to remote
+git push -u origin main
 
 # 5. Delete the old master branch from remote (after updating GitHub default)
 git push origin --delete master
