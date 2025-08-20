@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)https://pythoninstitute.org/pcep -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>PCEP</title>
+                                <link rel="stylesheet" href="./PCEP_Information_Page_PythonInstitute_files/946.0c718d36.css" integrity="sha384-kSmaPX58dzP42zXup5C97tkruYIXoVsm1L13A2cyLvDQkhfiSu6dEVQHtvtUW5Hw"><link rel="stylesheet" href="./PCEP_Information_Page_PythonInstitute_files/app.7b5e69a4.css" integrity="sha384-x7CPHMdG13vVDJ/MKmXu1/T62Vd5HFHoNXVH+Pb+dytAUR0V24GD3rKjH7uNEe8v">
+        
+    
+            <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+body {
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    overflow-x: hidden;
+}
+
+:root {
+    --clr-dodger-blue: #298af8;
+    --clr-science-blue: #0665d4;
+    --clr-denim: #1373e1;
+    --clr-white: #ffffff;
+    --clr-mine-shaft: #333333;
+    --clr-red: #c83737;
+    --clr-green: #5aa02c;
+}
+
+/*********************************************************************************************/
+
+
+.nav-laptop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding-inline: 20vw; */
+    /* background-color: white; */
+    height: 100px;
+    position: sticky;
+    top: 0;
+    /* width: 100%; */
+    z-index: 1000;
+}
+
+.nav-laptop::after {
+    content: '';
+    background: #ffffffa8;
+    height: 100px;
+    width: 120vw;
+    position: absolute;
+    z-index: -1;
+    left: -20vw;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid white;
+}
+
+.laptop-dropdown {
+  gap: 10px;
+  cursor: pointer;
+}
+
+.laptop-dropdown svg {
+  transform: translateY(2px);
+}
+
+.laptop-dropdown ul {
+  display: none;
+}
+
+.laptop-dropdown p {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  margin: 0;
+}
+
+.voucher-store-button {
+  position: relative;
+  padding-inline: .8rem;
+  padding-block: .4rem;
+  border-radius: 10vw;
+  background-color: #0066ff;
+  border: none;
+  z-index: 10000;
+
+  transition: all 400ms ease;
+}
+
+.voucher-store-button:hover {
+  background-color: #00317a;
+}
+
+.voucher-store-button a {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.laptop-dropdown:hover.laptop-dropdown ul {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  list-style: none;
+  background-color: rgb(255, 255, 255);
+  min-width: fit-content;
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  position: absolute;
+  border-radius: 0 0 8px 8px;
+}
+
+.laptop-dropdown__child {
+    border: 1px solid #d3d3d3;
+}
+
+.laptop-dropdown__child a {
+  text-decoration: none;
+  color: black;
+}
+
+.laptop-dropdown__child a:hover {
+  color: #0066ff;
+}
+
+.nav-mobile {
+    height: fit-content;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    width: 100%;
+}
+
+.nav-mobile * {
+  list-style: none;
+}
+
+.nav-list {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+}
+
+.nav-button {
+    background: none;
+    border-radius: 100vw;
+    padding-block: 1rem;
+    padding-inline: 2rem;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: all 400ms ease;
+}
+
+.nav-button:hover {
+  color: #0066ff;
+}
+
+
+.open-button {
+    display: none;
+
+    @media( width < 1000px) {
+        display: block;
+        border: 0;
+        background: none;
+    }
+}
+
+.close-button {
+        border: 0;
+        background: none;
+        cursor: pointer;
+}
+
+.open-dropdown {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.nav-item {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+
+    @media( width < 1000px) {
+        display: none;
+    }
+}
+
+.nav-mobile {
+  line-height: 2;
+}
+
+.nav-mobile ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.nav-mobile button:not(.voucher-store-button) {
+  border: none;
+  background: none;
+  color: black;
+  cursor: pointer;
+}
+
+.nav-mobile a:not(.voucher-store-button a)  {
+  color: #0066ff;
+  text-decoration: none;
+}
+
+.hero {
+    background-color: blueviolet;
+    height: 100vh;
+    padding-inline: 10vw;
+}
+
+.visually-hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*******************************************************************************************/
+
+.store-button {
+    color: white !important;
+    background-color: #0066ff;
+    padding-inline: 1.2rem !important;
+    border-radius: 100vw;
+    display: flex;
+    align-items: center;
+}
+
+.store-button:hover {
+    background-color: #0b5ed7;  
+}
+
+.store-button a {
+    color: white !important;
+    text-align: center;
+}
+
+.top-navi-bg {
+  background-color: var(--clr-white);
+}
+
+.top-navi .top-navi-item .top-navi-link {
+    color: var(--clr-mine-shaft);
+}
+
+.top-navi .top-navi-item .top-navi-link:hover {
+    color: var(--clr-science-blue);
+}
+
+.navbar {
+  background: var(--clr-white)!important;
+  color: var(--clr-mine-shaft);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--clr-mine-shaft);
+    font-weight: 500;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -o-transition: .4s;
+    transition: .4s;
+}
+
+.logo-image-navigation {
+    height: 50px !important;
+    width: 204px !important;
+}
+
+
+
+/* .bgr-footer {
+    background-image: url('../assets/61ee9e2fe3f74388645138.jpg');
+    background-repeat: no-repeat;
+    background-position: right bottom; 
+    background-size: 25%;
+} */
+
+.footer-address {
+    color: var(--clr-white);
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.footer-address .d-block:first-child {
+    color: var(--clr-white);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.footer .footer-top .footer-section .footer-header {
+    font-size: 16px;
+}
+
+.footer .footer-top .footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer .footer-top .footer-section ul li a {
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.badge-item {
+    border: 6px solid #f3f3f3;
+    padding: 30px;
+}
+
+.exam-page .subheading-1 {
+    font-size: 24px;
+}
+
+.exam-page .table th {
+    color: var(--clr-mine-shaft);
+}
+
+.exam-page .table>:not(:first-child) {
+    border-top: 2px solid #fdb934;
+}
+
+.exam-page .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem var(--clr-mine-shaft);
+}
+
+.exam-page .accordion-button:not(.collapsed) {
+    background-color: #fdb934;
+    color: #000;
+    font-weight: bold;
+}
+
+.exam-page .accordion-flush .accordion-item .accordion-button {
+    box-shadow: 0 0 0 0.25rem #000;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.exam-page .accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .badge-item img {
+        margin-top: 30px;
+    }
+}
+
+
+.footer .footer-bottom {
+    background-color: #333;
+    /* border: solid #3d3d3d; */
+    border-width: 1px 0 0;
+    padding: 40px 0;
+}
+
+#navbar .dropdown-menu {
+    font-size: 14px;
+}
+
+#navbar .dropdown-menu .dropdown-item {
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+#navbar .dropdown-menu hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.python-theme {
+    --primary-color: var(--clr-denim)!important;
+}
+        </style>
+    
+            <style>
+            .padding-top-200 {
+    padding-top: 120px;
+}
+
+.badge-item {
+    border: 1px solid #dddddd!important;
+}
+
+.testimonial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    padding: 30px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0 3px 12px;
+}
+
+.testimonial .testimonial-img {
+    display: inline-block;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.09) 0 3px 12px;
+}
+
+.testimonial .testimonial-title {
+    margin-top: 20px;
+    color: #333;
+}
+
+.testimonial .testimonial-pos {
+    margin-bottom: 20px;
+}
+
+.testimonial .testimonial-icon {
+    font-size: 44px;
+    color: var(--primary-color);
+}
+
+.testimonial .testimonial-content {
+    margin-top: 20px;
+    font-style: italic;
+    font-size: 14px;
+}
+        </style>
+    
+                    <link rel="icon" type="image/png" href="https://pythoninstitute.org/assets/61ee7df904591742689724.png">
+                
+
+
+
+
+
+
+
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script type="text/javascript" async="" src="./PCEP_Information_Page_PythonInstitute_files/js"></script><script type="text/javascript" async="" src="./PCEP_Information_Page_PythonInstitute_files/analytics.js.download"></script><script type="text/javascript" async="" src="./PCEP_Information_Page_PythonInstitute_files/js(1)"></script><script async="" src="./PCEP_Information_Page_PythonInstitute_files/js(2)"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-49926432-9');
+        </script>
+    </head>
+
+    <body class="python-theme">
+                    <div id="topNavi" class="top-navi top-navi-bg">
+    <div class="container-md" id="start">
+        <ul class="ms-auto me-4 my-3 my-lg-0 list-unstyled">
+            <li class="top-navi-item">
+                <a href="https://pythoninstitute.org/terms-and-conditions" class="top-navi-link">Terms and Conditions</a>
+            </li>
+            <li class="top-navi-item">
+                <a href="https://pythoninstitute.org/exam-policies" class="top-navi-link">Exam Policies</a>
+            </li>
+            <li class="top-navi-item">
+                <a href="https://pythoninstitute.org/faq" class="top-navi-link">FAQ</a>
+            </li>
+            <li class="top-navi-item">
+                <a href="https://pythoninstitute.org/support" class="top-navi-link">Support</a>
+            </li>
+            <li class="top-navi-item">
+                <a href="https://pythoninstitute.org/search" class="top-navi-link"><i class="fa fa-search"></i> Search</a>
+            </li>
+            <!-- <li class="top-navi-item">
+                <a href="https://ums.edube.org/" class="top-navi-link"><i class="fa fa-shopping-cart"></i>&nbsp;Buy Vouchers</a>
+            </li> -->
+        </ul>
+    </div>
+</div>
+
+    <nav class="container nav-laptop">
+        <a href="https://pythoninstitute.org/">
+            <img style="max-width: 200px;" src="./PCEP_Information_Page_PythonInstitute_files/657976699eae5811956504.png" alt="">
+        </a>
+
+        <div class="nav-list"> 
+            <ul class="nav-item">
+                <li class="laptop-dropdown"><p>About <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></p>
+                    <ul class="laptop-dropdown__child">
+                        <li><a href="https://pythoninstitute.org/about-pi">Python Institute</a></li>
+                        <li><a href="https://pythoninstitute.org/leadership">Leadership</a></li>
+                        <li><a href="https://pythoninstitute.org/about-python">Python®</a></li>
+                        <li><a href="https://pythoninstitute.org/contact">Contact Us</a></li>
+                    </ul>
+                </li>
+                <li class="laptop-dropdown"><p>Certifications <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></p>
+                    <ul class="laptop-dropdown__child">
+                        <li><strong>About Python Institute Certifications</strong>
+                                </li><li><a href="https://pythoninstitute.org/certification-tracks">&nbsp;&nbsp;&nbsp;&nbsp;Certification Roadmap</a></li>
+                                <li><a href="https://pythoninstitute.org/exam-development">&nbsp;&nbsp;&nbsp;&nbsp;Exam Development</a></li>
+                                <li><a href="https://pythoninstitute.org/why-get-certified">&nbsp;&nbsp;&nbsp;&nbsp;Why Get Certified</a></li>
+                        
+                        <li><strong>General-Purpose Programming</strong>
+                                </li><li><a href="https://pythoninstitute.org/pcep">&nbsp;&nbsp;&nbsp;&nbsp;PCEP™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcap">&nbsp;&nbsp;&nbsp;&nbsp;PCAP™ (Associate)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcpp1">&nbsp;&nbsp;&nbsp;&nbsp;PCPP1™ (Professional 1)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcpp2">&nbsp;&nbsp;&nbsp;&nbsp;PCPP2™ (Professional 2)</a></li>
+                        
+                        <li><strong>Testing</strong>
+                                </li><li><a href="https://pythoninstitute.org/pcet">&nbsp;&nbsp;&nbsp;&nbsp;PCET™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcat">&nbsp;&nbsp;&nbsp;&nbsp;PCAT™ (Associate)</a></li>
+                        
+                        <li><strong>Data Science</strong>
+                                </li><li><a href="https://pythoninstitute.org/pced">&nbsp;&nbsp;&nbsp;&nbsp;PCED™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcad">&nbsp;&nbsp;&nbsp;&nbsp;PCAD™ (Associate)</a></li>
+                        
+                        <!-- <li><strong>Security</strong>
+                                <li><a href="https://pythoninstitute.org/pces">&nbsp;&nbsp;&nbsp;&nbsp;PCES™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcas">&nbsp;&nbsp;&nbsp;&nbsp;PCAS™ (Associate)</a></li>
+                        </li> -->
+                        <hr>
+                        <li><strong>Credentials Verification</strong>
+                                </li><li><a href="https://pythoninstitute.org/credential-verification">&nbsp;&nbsp;&nbsp;&nbsp;Verify Credentials</a></li>
+                                <li><a href="https://pythoninstitute.org/digital-badging">&nbsp;&nbsp;&nbsp;&nbsp;Digital Badging</a></li>
+                        
+                    </ul>
+
+                </li>
+                <li class="laptop-dropdown"><p>Study Resources <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></p>
+                    <ul class="laptop-dropdown__child">
+                        <li><strong>About Python Institute Courses</strong>
+                                </li><li><a href="https://pythoninstitute.org/study-resources">&nbsp;&nbsp;&nbsp;&nbsp;Why learn Python?</a></li>
+                        
+                        <li><strong>General-Purpose Programming</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-essentials-1">&nbsp;&nbsp;&nbsp;&nbsp;Python Essentials 1 (Beginner)</a></li>
+                                <li><a href="https://pythoninstitute.org/python-essentials-2">&nbsp;&nbsp;&nbsp;&nbsp;Python Essentials 2 (Intermediate)</a></li>
+                                <li><a href="https://pythoninstitute.org/python-professional-1">&nbsp;&nbsp;&nbsp;&nbsp;Python Professional (Advanced)</a></li>
+                        
+                        <li><strong>Testing</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-for-testing-101">&nbsp;&nbsp;&nbsp;&nbsp;Python for Testing 101 (PT101) (Beginner +)</a></li>
+                        
+                        <li><strong>Data Science</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-for-data-analysis-essentials">&nbsp;&nbsp;&nbsp;&nbsp;Data Analysis Essentials with Python (Intermediate)</a></li>
+                        
+                        <hr>
+                        <li><strong>Collaborative Projects</strong>
+                                </li><li><a href="https://pythoninstitute.org/netacad">&nbsp;&nbsp;&nbsp;&nbsp;Cisco Networking Academy</a></li>
+                                <li><a href="https://pythoninstitute.org/digital-badging">&nbsp;&nbsp;&nbsp;&nbsp;Digital Badging</a></li>
+                        
+                        <hr>
+                        <li><strong>Resource Partner Content</strong>
+                                </li><li><a href="https://pythoninstitute.org/publishing-partners">&nbsp;&nbsp;&nbsp;&nbsp;Publishing Partners (Paid)</a></li>
+                        
+                    </ul>
+
+                </li>
+                <li class="laptop-dropdown"><p>Community <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></p>
+                    <ul class="laptop-dropdown__child">
+                        <li><strong>Community</strong>
+                                </li><li><a href="https://pythoninstitute.org/community">&nbsp;&nbsp;&nbsp;&nbsp;Join the Community</a></li>
+                        
+                        <li><strong>Partners</strong>
+                                </li><li><a href="https://pythoninstitute.org/partners">&nbsp;&nbsp;&nbsp;&nbsp;Partner Programs</a></li>
+                                <li><a href="https://pythoninstitute.org/education-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Education Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/testing-service-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Testing Service Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/publishing-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Publishing Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/channel-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Channel Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/strategic-partners">&nbsp;&nbsp;&nbsp;&nbsp;Strategic Partners</a></li>
+                        
+                    </ul>
+
+                </li>
+                <li><button class="voucher-store-button"><a href="https://ums.edube.org/store">Voucher Store <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
+</svg></a></button></li>
+            </ul>
+            <button class="open-button"><a href="https://pythoninstitute.org/pcep#start"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-list" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"></path>
+</svg></a></button>
+            <button class="close-button visually-hidden"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"></path>
+</svg></button>
+        </div>
+    </nav>
+
+    <nav class="nav-mobile visually-hidden">
+        <ul>
+            <li><button class="open-dropdown">About <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></button>
+                <ul class="dropdown visually-hidden">
+                        <li><a href="https://pythoninstitute.org/about-pi">Python Institute</a></li>
+                        <li><a href="https://pythoninstitute.org/leadership">Leadership</a></li>
+                        <li><a href="https://pythoninstitute.org/about-python">Python®</a></li>
+                        <li><a href="https://pythoninstitute.org/contact">Contact Us</a></li>
+                </ul>
+            </li>
+            <li><button class="open-dropdown">Certifications <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></button>
+                <ul class="dropdown visually-hidden">
+                        <li><strong>About Python Institute Certifications</strong>
+                                </li><li><a href="https://pythoninstitute.org/certification-tracks">&nbsp;&nbsp;&nbsp;&nbsp;Certification Roadmap</a></li>
+                                <li><a href="https://pythoninstitute.org/exam-development">&nbsp;&nbsp;&nbsp;&nbsp;Exam Development</a></li>
+                                <li><a href="https://pythoninstitute.org/why-get-certified">&nbsp;&nbsp;&nbsp;&nbsp;Why Get Certified</a></li>
+                        
+                        <li><strong>General-Purpose Programming</strong>
+                                </li><li><a href="https://pythoninstitute.org/pcep">&nbsp;&nbsp;&nbsp;&nbsp;PCEP™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcap">&nbsp;&nbsp;&nbsp;&nbsp;PCAP™ (Associate)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcpp1">&nbsp;&nbsp;&nbsp;&nbsp;PCPP1™ (Professional 1)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcpp2">&nbsp;&nbsp;&nbsp;&nbsp;PCPP2™ (Professional 2)</a></li>
+                        
+                        <li><strong>Testing</strong>
+                                </li><li><a href="https://pythoninstitute.org/pcet">&nbsp;&nbsp;&nbsp;&nbsp;PCET™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcat">&nbsp;&nbsp;&nbsp;&nbsp;PCAT™ (Associate)</a></li>
+                        
+                        <li><strong>Data Science</strong>
+                                </li><li><a href="https://pythoninstitute.org/pced">&nbsp;&nbsp;&nbsp;&nbsp;PCED™ (Entry)</a></li>
+                                <li><a href="https://pythoninstitute.org/pcad">&nbsp;&nbsp;&nbsp;&nbsp;PCAD™ (Associate)</a></li>
+                        
+                        <hr>
+                        <li><strong>Credentials Verification</strong>
+                                </li><li><a href="https://pythoninstitute.org/credential-verification">&nbsp;&nbsp;&nbsp;&nbsp;Verify Credentials</a></li>
+                                <li><a href="https://pythoninstitute.org/digital-badging">&nbsp;&nbsp;&nbsp;&nbsp;Digital Badging</a></li>
+                        
+                </ul>
+            </li>
+            <li><button class="open-dropdown">Study Resources <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></button>
+                <ul class="dropdown visually-hidden">
+                        <li><strong>About Python Institute Courses</strong>
+                                </li><li><a href="https://pythoninstitute.org/study-resources">&nbsp;&nbsp;&nbsp;&nbsp;Why learn Python?</a></li>
+                        
+                        <li><strong>General-Purpose Programming</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-essentials-1">&nbsp;&nbsp;&nbsp;&nbsp;Python Essentials 1 (Beginner)</a></li>
+                                <li><a href="https://pythoninstitute.org/python-essentials-2">&nbsp;&nbsp;&nbsp;&nbsp;Python Essentials 2 (Intermediate)</a></li>
+                                <li><a href="https://pythoninstitute.org/python-professional-1">&nbsp;&nbsp;&nbsp;&nbsp;Python Professional (Advanced)</a></li>
+                        
+                        <li><strong>Testing</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-for-testing-101">&nbsp;&nbsp;&nbsp;&nbsp;Python for Testing 101 (PT101) (Beginner +)</a></li>
+                        
+                        <li><strong>Data Science</strong>
+                                </li><li><a href="https://pythoninstitute.org/python-for-data-analysis-essentials">&nbsp;&nbsp;&nbsp;&nbsp;Data Analysis Essentials with Python (Intermediate)</a></li>
+                        
+                        <hr>
+                        <li><strong>Collaborative Projects</strong>
+                                </li><li><a href="https://pythoninstitute.org/netacad">&nbsp;&nbsp;&nbsp;&nbsp;Cisco Networking Academy</a></li>
+                                <li><a href="https://pythoninstitute.org/digital-badging">&nbsp;&nbsp;&nbsp;&nbsp;Digital Badging</a></li>
+                        
+                        <hr>
+                        <li><strong>Resource Partner Content</strong>
+                                </li><li><a href="https://pythoninstitute.org/publishing-partners">&nbsp;&nbsp;&nbsp;&nbsp;Publishing Partners (Paid)</a></li>
+                        
+                </ul>
+            </li>
+            <li><button class="open-dropdown">Community <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"></path></svg></button>
+                <ul class="dropdown visually-hidden">
+                        <li><strong>Community</strong>
+                                </li><li><a href="https://pythoninstitute.org/community">&nbsp;&nbsp;&nbsp;&nbsp;Join the Community</a></li>
+                        
+                        <li><strong>Partners</strong>
+                                </li><li><a href="https://pythoninstitute.org/partners">&nbsp;&nbsp;&nbsp;&nbsp;Partner Programs</a></li>
+                                <li><a href="https://pythoninstitute.org/education-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Education Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/testing-service-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Testing Service Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/publishing-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Publishing Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/channel-partner-program">&nbsp;&nbsp;&nbsp;&nbsp;Channel Partners</a></li>
+                                <li><a href="https://pythoninstitute.org/strategic-partners">&nbsp;&nbsp;&nbsp;&nbsp;Strategic Partners</a></li>
+                        
+                </ul>
+            </li>
+            <li><button class="voucher-store-button"><a href="https://ums.edube.org/store">Voucher Store <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"></path>
+</svg></a></button></li>
+        </ul>
+    </nav>
+    
+    <div class="container padding-top-200 margin-bottom-100">
+        <div class="row">
+<div class="col-sm-12">
+
+<h1 class="heading-1">PCEP™ – Certified Entry-Level Python Programmer</h1>
+(Exam PCEP-30-0x)
+<br><br>
+
+
+<p>PCEP™ – Certified Entry-Level Python Programmer certification shows that the individual is familiar with universal computer programming concepts like data types, containers, functions, conditions, loops, as well as Python programming language syntax, semantics, and the runtime environment.
+</p>
+
+<div class="row margin-top-10 margin-bottom-50 badge-item align-items-center">
+    <div class="col-md-9">
+        <b>PCEP™ – Certified Entry-Level Python Programmer</b> certification (Exam PCEP-30-0x) is a professional credential that measures the candidate's ability to accomplish coding tasks related to the essentials of programming in the Python language. A test candidate should demonstrate sufficient knowledge of the universal concepts of computer programming, the syntax and semantics of the Python language, as well as the skills in resolving typical implementation challenges with the help of the Python Standard Library.
+        <br><br>
+    The PCEP™ certification shows that the individual is familiar with the following concepts: fundamental <b>terms and definitions</b> (e.g. compilation vs. interpretation), Python's <b>logic and structure</b> (e.g. keywords, instructions, indentation), <b>literals</b>, <b>variables</b>, and <b>numeral systems</b>, <b>operators</b> and <b>data types</b>, <b>I/O operations</b>, <b>control flow</b> mechanisms (conditional blocks and loops), <b>data collections</b> (lists, tuples, dictionaries, strings), <b>functions</b> (decomposition, built-in and user-defined functions, organizing interaction between functions and their environment, generators, recursion), <b>exceptions</b> (exception handling, hierarchies), as well as the essentials of Python programming language <b>syntax</b>, <b>semantics</b>, and <b>the runtime environment</b>.
+    </div>
+    <div class="col-md-3 text-center">
+        <div class="margin-bottom-30">
+            <img src="./PCEP_Information_Page_PythonInstitute_files/61f11fac8e6f4153315957.png" height="200">
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div class="row">
+<div class="col-sm-12 col-md-6">
+<iframe width="528" height="299" src="./PCEP_Information_Page_PythonInstitute_files/8qG463VRPjI.html" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+
+<div class="col-sm-12 col-md-6">
+<p>Becoming PCEP™ certified ensures that the individual is acquainted with the most essential means provided by Python 3 to enable them to start their own studies at an intermediate level, and to continue their professional development.</p>
+
+<p>PCEP™ certification is an interim step to the PCAP™ certification, and the starting point to launch a career in software development, Python programming, and related technologies. Becoming PCEP™ certified helps certification holders stand out from other candidates, get a foot in the door with an employer, and land a junior-level job in the IT sector and anywhere the basic knowledge of Python is an asset.</p>
+</div>
+</div>
+
+<br>
+<div class="row margin-top-10 margin-bottom-50 align-items-center">
+<img src="./PCEP_Information_Page_PythonInstitute_files/62161f986f6ad508730079.png">
+</div>
+<br>
+
+
+<div class="row">
+<div class="col-sm-12 col-md-7">
+
+<h2>Become PCEP™ certified and get your foot in the door</h2>
+
+<p>Python is the programming language that opens more doors than any other, and the more you understand Python, the more you can do in the 21st Century. With a solid knowledge of Python, you can work in a multitude of jobs and a multitude of industries.</p>
+<p>PCEP™ certification will be particularly valuable for:</p>
+
+<ul>
+<li><b>aspiring programmers</b> and learners interested in learning programming for fun and job-related tasks;</li>
+<li>learners looking to gain fundamental skills and knowledge for an entry-level job role as a <b>software developer</b>, <b>data analyst</b>, or <b>tester</b>;</li>
+<li><b>industry professionals</b> wishing to explore technologies that are connected with Python, or that utilize it as a foundation;</li>
+<li><b>team leaders</b>, <b>product managers</b>, and <b>project managers</b> who want to understand the terminology and processes in the software development cycle to more effectively manage and communicate with production and development teams.</li>
+</ul>
+
+<p>Python is either the highest-paid, or one of the highest-paid languages in all parts of the world today, and the salaries range between <b>$90,000 and $130,000 a year</b> (source: SalaryExpert.com).</p>
+
+<p>With the ever-increasing reliance on the Internet, and with Python playing an ever-growing role, the salary of the average Python programmer is almost surely to rise.</p>
+
+<p>Currently, there are <b>100,000+ unfulfilled Python jobs</b> around the world, and the supply of qualified Python programmers is unable to match the demand.</p>
+
+</div>
+
+
+
+<div class="col-sm-12 col-md-5">
+<div class="testimonial">
+<div class="testimonial-img"><img src="./PCEP_Information_Page_PythonInstitute_files/621628484ac99693380933.png" height="200" alt="Pablo Quesada"></div>
+<h4 class="testimonial-title">Pablo Quesada</h4>
+<span class="testimonial-pos">Global Operations Manager, San José, Costa Rica, PCEP, PCAP</span>
+<i class="fa fa-quote-left testimonial-icon"></i>
+<p class="testimonial-content">
+I started the Python Certification Program featured by Python Institute to prepare myself for the Python Entry Level Certification. I strongly recommend this certification program and encourage anybody who wants to start a career in this matter – you won't be disappointed. With this program completed, I could obtain my PCEP certification and prepared for the PCAP as well, and also implemented some projects in my current job already.</p>
+</div>
+</div>
+
+</div>
+<br>
+
+
+<h1>PCEP™: Exam Information</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SPECIFICATIONS ITEM</th>
+      <th scope="col">DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Exam name</th>
+      <td>PCEP™ – Certified Entry-Level Python Programmer</td>
+    </tr>
+    <tr>
+      <th scope="row">Exam Code &amp; Current Exam Versions</th>
+      <td>PCEP-30-02 (Status: Active)
+      <br>PCEP-30-01 (Status: Retired on December 31, 2022)</td>
+    </tr>
+    <tr>
+      <th scope="row">Prerequisites</th>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th scope="row">Validity</th>
+      <td>Lifetime</td>
+    </tr>
+    <tr>
+      <th scope="row">Exam Duration</th>
+      <td>PCEP-30-02 – Exam: 40 minutes, NDA/Tutorial: 5 minutes
+      <br>PCEP-30-01 – Exam: 45 minutes, NDA/Tutorial: 5 minutes</td>
+    </tr>
+    <tr>
+      <th scope="row">Number of Questions</th>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th scope="row">Format</th>
+      <td>Single- and multiple-select questions, drag &amp; drop, gap fill, sort, code fill, code insertion | Python 3.x</td>
+    </tr>
+    <tr>
+      <th scope="row">Passing Score</th>
+      <td>70%</td>
+    </tr>
+    <tr>
+      <th scope="row">Languages</th>
+      <td>English, Spanish</td>
+    </tr>
+    <tr>
+      <th scope="row">Cost</th>
+      <td><p>USD 69 (Exam: Single-Shot)
+      <br>USD 86 (Exam: with one retake)
+      <br>USD 95 (Exam: Single-Shot + Practice Test)
+      <br>USD 29 (Practice Test)</p>
+      <p><a href="https://ums.edube.org/store?q=pcep" target="_blank"><button type="button" class="btn btn-primary">Purchase Voucher</button></a></p></td>
+    </tr>
+    <tr>
+      <th scope="row">Delivery Channel</th>
+      <td>OpenEDG Testing Service – <a href="https://pythoninstitute.org/test-now" target="_blank">TestNow™</a></td>
+    </tr>
+    <tr>
+      <th scope="row">Testing Policies</th>
+      <td>PCEP-30-0x Testing Policies – Click <a href="https://pythoninstitute.org/pcep-testing-policies" target="_blank">here</a> to view Testing Policies</td>
+    </tr>
+    <tr>
+      <th scope="row">Exam Syllabus</th>
+      <td>PCEP-30-0x Exam Syllabus – Click <a href="https://pythoninstitute.org/pcep-exam-syllabus" target="_blank">here</a> to view Exam Syllabus</td>
+    </tr>
+    <tr>
+      <th scope="row">Associated Certifications</th>
+      <td>PCAP – Certified Associate in Python Programming (Exam PCAP-31-0x)
+      <br>PCPP1 – Certified Professional in Python Programming 1 (Exam PCPP-32-10x)</td>
+    </tr>
+    <tr>
+      <th scope="row">Courses Aligned</th>
+      <td><a href="https://edube.org/study/pe1" target="_blank">Python Essentials 1</a> (Free – Edube Interactive™, an OpenEDG Education Platform)
+      <br><a href="https://www.netacad.com/courses/programming/pcap-programming-essentials-python" target="_blank">PCAP Programming Essentials in Python</a> (Cisco Networking Academy, Part 1, Modules 1-4)</td>
+    </tr>
+  </tbody>
+</table>
+
+<br><br>
+
+<!-- ******************** FAQ SECTION ************************ -->
+
+<div class="row">
+<div class="col-sm-12">
+
+<h3 id="faq-section">PCEP FAQ and Quick References</h3>
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        How do I take the PCEP exam?
+      </button>
+    </h2>
+<div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+<ol>
+<li>Read the <a href="http://pythoninstitute.org/pcep-testing-policies">PCEP Testing Policies</a> and <a href="http://pythoninstitute.org/test-now">TestNow specifications</a> to <b>make sure you follow the code of conduct</b>, meet all the <b>technical requirements</b>, and know what to expect during your exam session.</li>
+<li><b>Create a Test Candidate account</b> if you haven't already done it. (Download a <a href="https://pythoninstitute.org/assets/626bca477fe1d147862999.pdf">PDF Tutorial</a>)</li>
+<li>Go to <a href="https://ums.edube.org/store?q=pcep">OpenEDG Voucher Store</a> and <b>buy an exam voucher</b>. You can choose between a single-shot voucher, voucher with retake, and voucher + practice test bundle.</li>
+<li>Log in to your test candidate account, enter the voucher code, perform a diagnostics check, check in, and launch your exam session. (Download a <a href="https://pythoninstitute.org/assets/626bebffa60f3431657341.pdf">PDF Tutorial</a>)</li>
+</ol>
+
+      </div>
+    </div>
+  </div>
+  
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Can I retake the exam?
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        You can only retake a failed exam after 7 days of your last attempt (waiting period).
+
+<br><br>
+<ul>
+<li>If you purchased a voucher with a free retake option and failed your exam – wait 7 days, go to the Exam History section on your Test Candidate account, and click the <i>Get Free Retake</i> button that will become activated next to your exam session status information. Your exam voucher will automatically be assigned to your account and become available in the <i>Certify</i> section.</li>
+<li>If you purchased a single-shot voucher and failed your exam, you need to purchase a new voucher to take the exam again. You can launch a new exam session after 7 days from your last attempt.</li>
+</ul>
+      </div>
+    </div>
+  </div>
+
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        How do I access the PCEP practice test?
+      </button>
+    </h2>
+    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Here's what you need to do to access the official Python Institute PCEP practice tests:
+        <br>
+        <ol>
+        <li>Go to <a href="https://ums.edube.org/products/pcep-30-0x-practice-test-compendium">OpenEDG Voucher Store</a> and <b>buy a practice test voucher</b>. (skip this step if you already have a voucher)</li>
+        <li>Log in to your <a href="https://edube.org/login" target="_blank">OpenEDG Learner Account</a>, <b>click "Practice"</b>, enter the voucher code, read and accept the terms and conditions, and activate the practice test. (Download a <a href="https://pythoninstitute.org/assets/62f0cce696892045955740.pdf">PDF Tutorial</a>)</li>
+        <br>
+        Note that if you're logged in as <i>Test Candidate</i>, you need to switch your role to <i>Learner</i> in order to be able to launch the practice test.
+      </ol></div>
+    </div>
+  </div>
+  
+
+<div class="accordion-item">
+    <h2 class="accordion-header" id="headingFour">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        I passed the PCEP exam. What now?
+      </button>
+    </h2>
+    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        Congratulations! You've officially joined the Python Institute certified community, and earned an industry credential that validates your proficiency in Python, computer programming, and related technologies. Within 24 hours of your exam, you will receive an email with a link to your digital certification, verification code, and a PCEP badge issued by Credly's Acclaim. You can now share your awesome achievement with your peers, colleagues, and employers via LinkedIn and other social media channels.
+
+<br><br>What next? Keep on learning, keep on mastering your Python skills, and keep on climbing the certification ladder. Sign up for Python Essentials 2 and get yourself prepared for the PCAP certification to take your career to an even higher level.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<a href="https://pythoninstitute.org/pcep#" id="backToTop" class="back-to-top" style="display: inline;">
+    <i class="fa fa-chevron-up"></i>
+</a>
+    
+
+    <footer class="footer bgr-footer">
+    <div style="background-color: #333!important; padding-bottom: 30px;" class="footer-top bgr-footer">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <div class="col-sm-8 col-md-5 col-lg-3 d-flex align-items-center">
+                    <div class="margin-bottom-50">
+                        <div class="footer-logo margin-bottom-30">
+                            <a href="https://pythoninstitute.org/pcep#"><img src="./PCEP_Information_Page_PythonInstitute_files/61e94ab03c704674847077.png" width="65%" alt="Logo"></a>
+                        </div>
+                        <div class="footer-social">
+                            <a href="https://www.facebook.com/pythoninstitute.org"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://discord.gg/eJ2sW8SYgJ" target="_blank"><i class="fab fa-discord"></i></a>
+                            <!-- <a href="https://www.twitter.com/pythoninstitute"><i class="fab fa-twitter"></i></a> -->
+                            <a href="https://www.linkedin.com/company/pythoninstitute/"><i class="fab fa-linkedin"></i></a>
+                            <a href="https://www.youtube.com/channel/UC2IRXg1rRD2yiig1Sqbf6iQ/featured"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-md-3 col-lg-2">
+                    <div class="footer-section margin-bottom-50">
+                        <h5 class="footer-header">Terms &amp; Policies</h5>
+                        <ul>
+                            <li><a href="https://pythoninstitute.org/terms-and-conditions">Terms and Conditions</a></li>
+                            <li><a href="https://pythoninstitute.org/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="https://pythoninstitute.org/cookie-policy">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-7 col-md-4 col-lg-2">
+                    <div class="footer-section margin-bottom-50">
+                        <h5 class="footer-header">Links &amp; Resources</h5>
+                        <ul>
+                            <li><a href="https://edube.org/">Edube Interactive ™</a></li>
+                            <li><a href="https://edube.org/sandbox">Sandbox</a></li>
+                            <li><a href="https://ums.edube.org/store">Voucher Store</a></li>
+                            <li><a href="https://pythoninstitute.org/brand-resources">Brand Resources</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-5 col-md-4 col-lg-3 footer-address">
+                    <span class="d-block margin-bottom-10">
+                        OpenEDG | Open Education and Development Group, LLC
+                        </span>
+                    
+                    <span class="d-block"><b><u>North America</u></b>: 1013 Centre</span>
+                    <span class="d-block">Road, Suite 403-A, Wilmington, DE,</span>
+                    <span class="d-block">19805, United States</span>
+                    <span class="d-block">+1 (302) 498-90-37</span>
+                    <span class="d-block">info@openedg.org</span>
+                    
+                    <span class="d-block margin-top-10"><b><u>Europe</u></b>: Jagiellonska 67, West</span>
+                    <span class="d-block">Pomerania, Szczecin, 70-382,</span>
+                    <span class="d-block">Poland</span>
+                    <span class="d-block">+49-333-33-50-98-09</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-xl-12">
+                    <div class="footer-copyright text-center">
+                        <p>© Copyright Open Education and Development Group 2011-<script>document.write(new Date().getFullYear())</script>2025. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="./PCEP_Information_Page_PythonInstitute_files/js(3)"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X4YHKJG426');
+</script>
+                        <script src="./PCEP_Information_Page_PythonInstitute_files/runtime.5e097f3e.js.download" defer="" integrity="sha384-e06kNfSMwrDbbsQd+ogx2TETpA6T9v60sgED7dTmJNbiYUlCnVHjY1af85WMeBYW"></script><script src="./PCEP_Information_Page_PythonInstitute_files/755.5a8586e9.js.download" defer="" integrity="sha384-gr4pBhc/crsd3k0Y6LPY6EzskQ1errcIxrCcR3mXD0bY9Ud2y2N0jCEomRCZiY9G"></script><script src="./PCEP_Information_Page_PythonInstitute_files/946.d8650c66.js.download" defer="" integrity="sha384-oBRh1Hur69Yp+HKhdcu6j3PWfhD5tFLPuNGh+v4/W77Xc9nsIySnA5riGuj3nO+2"></script><script src="./PCEP_Information_Page_PythonInstitute_files/605.654fc373.js.download" defer="" integrity="sha384-JtdkfBlt/jixfu8iLPZ0ySq7Z1lFlOrUxpUX/8+7ifdlmJQ7Ln60tYFY08rQc2KD"></script><script src="./PCEP_Information_Page_PythonInstitute_files/app.a856d18a.js.download" defer="" integrity="sha384-DxpCpqcD7UAr0ONANiCzEMPWX7fXRuVU4xaiOFvTVO/VMGndVyiaQPZt3jWM5rxe"></script>
+        
+
+            <script>
+            /// Open and close mobile nav
+        const navMobile = document.querySelector('.nav-mobile');
+        const openButton = document.querySelector('.open-button');
+        const closeButton = document.querySelector('.close-button');
+
+        openButton.addEventListener('click', () => {
+            navMobile.classList.add('visible');
+            navMobile.classList.remove('visually-hidden');
+            openButton.classList.add('visually-hidden');
+            closeButton.classList.remove('visually-hidden');
+        });
+
+        closeButton.addEventListener('click', () => {
+            navMobile.classList.add('visually-hidden');
+            navMobile.classList.remove('visible');
+            closeButton.classList.add('visually-hidden');
+            openButton.classList.remove('visually-hidden');
+        });
+
+
+
+        /// Open and close dropdown menus
+        const openDropdownButtons = document.querySelectorAll('.open-dropdown');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        openDropdownButtons.forEach((button, idx) => {
+            button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Hide all dropdowns first
+            dropdowns.forEach(d => d.classList.add('visually-hidden'));
+            // Show the corresponding dropdown
+            const dropdown = button.nextElementSibling;
+            if (dropdown && dropdown.classList.contains('dropdown')) {
+                dropdown.classList.remove('visually-hidden');
+            }
+            });
+        });
+
+        document.addEventListener('click', () => {
+            dropdowns.forEach(d => d.classList.add('visually-hidden'));
+        });
+
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+            });
+        });
+        </script>
+    
+        
+
+</body></html>

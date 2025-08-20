@@ -1,0 +1,91 @@
+$(document).ready(function () {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+
+    $('a').click(function (e) {
+        const $parentElement = $(e.target).parent();
+
+        if ($parentElement.hasClass('btn-mark-as-complete')) {
+            e.preventDefault();
+
+            const id = $parentElement.data('course');
+            const elementId = $parentElement.data('element');
+
+            if (!id) {
+                return;
+            }
+
+            const $studyResource = $parentElement.closest('.study-resource');
+            const $tooltip = $($studyResource.find('.has-tip'));
+            let checked = true;
+
+            if ($studyResource.hasClass('completed')) {
+                $studyResource.removeClass('completed');
+                checked = false;
+
+                if ($tooltip) {
+                    $tooltip.tooltip('hide');
+                    $tooltip.attr('data-bs-original-title', $tooltip.data('original-title'));
+                }
+            } else {
+                $studyResource.addClass('completed');
+
+                if ($tooltip) {
+                    $tooltip.tooltip('hide');
+                    $tooltip.attr('data-bs-original-title', 'Mark as not complete');
+                }
+            }
+
+            updateProgressBar();
+
+            const data = new FormData();
+            data.append('elementId', elementId);
+            data.append('checked', checked);
+
+            $.ajax({
+                type: 'POST',
+                url: Routing.generate('api_user_course_mark_course_element_as_completed', {'id' : id}),
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (data) {},
+                error: function (data) {}
+            });
+        }
+    });
+
+    const $milestones = $('.milestone-item');
+
+    $milestones.each(function (index, milestone) {
+        const numOfItems = $(milestone).find('.assessment-or-exam').length;
+        const numOfCompletedItems = $(milestone).find('.assessment-or-exam.completed').length;
+
+        if (numOfItems && numOfItems === numOfCompletedItems) {
+            const $studyResource = $(milestone).find('.study-resource');
+            if ($studyResource.length) {
+                $studyResource.addClass('completed');
+            }
+
+            $(milestone).addClass('completed');
+        }
+    });
+
+    function updateProgressBar() {
+        $milestones.each(function (index, milestone) {
+            const numOfItems = $(milestone).find('.milestone-item-resource').length;
+            const numOfCompletedItems = $(milestone).find('.milestone-item-resource.completed').length;
+
+            if (numOfItems && numOfItems === numOfCompletedItems) {
+                $(milestone).addClass('completed');
+            } else {
+                if ($(milestone).hasClass('completed')) {
+                    $(milestone).removeClass('completed');
+                }
+            }
+        });
+    }
+
+    updateProgressBar();
+});
